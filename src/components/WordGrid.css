@@ -1,0 +1,28 @@
+.word-tile {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  text-align: center;
+  line-height: 1.5rem;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.word-tile:hover {
+  background: #000;
+  color: #fff;
+}
+
+.word-tile.selected {
+  background: #e5dbff;
+  color: #845ef7;
+}
+
+.word-tile.available {
+  background: #b197fc;
+}
+
+.word-tile.success {
+  background: #ccedff;
+  background: #1c7cd6;
+}
