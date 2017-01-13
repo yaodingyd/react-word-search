@@ -1,3 +1,15 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.wordinput-generate {
+  display: block;
+  margin: 1rem auto;
+}
+
 .word-tile {
   display: inline-block;
   width: 1.5rem;

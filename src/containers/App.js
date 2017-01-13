@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import WordList from '../components/WordList'
 import WordInput from '../components/WordInput'
 import WordGrid from '../components/WordGrid'
-import { addWord, produceGrid, tryToAddCharacter, removeCharacter } from '../actions'
+import { addWord, produceGrid, tryToAddCharacter, tryToRemoveCharacter } from '../actions'
 
 //const wordGrid = ['test', 'test', 'test', 'test' ]
 
@@ -12,7 +12,7 @@ class App extends Component {
   render () {
     const { updateWord, wordList, produceGrid, wordGrid, handleTileClick} = this.props
     return (
-      <div>
+      <div className="container">
         <WordInput updateWordList={updateWord} produceGrid={produceGrid}/>
         <WordList wordList={wordList}/>
         <WordGrid wordGrid={wordGrid} handleTileClick={handleTileClick}/>
@@ -34,7 +34,7 @@ function mapDispatchToProps (dispatch) {
       if (!selected) {
         dispatch(tryToAddCharacter(character, id))
       } else {
-        dispatch(removeCharacter(character, id))
+        dispatch(tryToRemoveCharacter(character, id))
       }
     }
   }

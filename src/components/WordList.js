@@ -3,11 +3,11 @@ import React from 'react'
 const WordList = ({wordList}) => {
   let index = 0;
   return (
-    <div>
+    <ul>
       {wordList.map(word => (
-        <div key={index++}>{word}</div>
+        <li key={index++}>{word}</li>
       ))}
-    </div>
+    </ul>
   )
 } 
 

@@ -38,12 +38,26 @@ const wordGrid = (state = [], action) => {
         selected: false
       }
       return newState
+    case ACTIONS.SEARCH_SUCCEED:
+      return state.map((row) => {
+        return row.map((tile) => {
+          if (tile.selected) {
+            return {
+              ...tile,
+              selected: false,
+              success: true
+            }
+          } else {
+            return tile
+          }
+        })
+      })
     default:
       return state
   }
 }
 
-const searchResult = (state = {}, action) => {
+const searchResult = (state = [], action) => {
   switch (action.type) {
     case ACTIONS.ADD_CHAR:
       /*let addState = {...state}
@@ -53,9 +67,11 @@ const searchResult = (state = {}, action) => {
         action.character
       ]
     case ACTIONS.REMOVE_CHAR:
-      return state.filter((char) => {
+      return state.filter((char, index) => {
         return char !== action.character
       })
+    case ACTIONS.SEARCH_SUCCEED:
+      return []
     default:
       return state
   }

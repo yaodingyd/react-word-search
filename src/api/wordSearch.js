@@ -35,7 +35,7 @@ export function generateGridData (wordArray, size) {
       return {
         character: char,
         selected: false,
-        available: true,
+        available: false,
         success: false
       }
     })

@@ -32,10 +32,10 @@ class WordInput extends Component {
     const {inputValue} = this.state
     return (
       <div>
-        <span className="wordinput-title">Please input your word</span>
-        <input autoFocus className="wordinput" value={inputValue} onChange={this.changeInputValue} onKeyPress={this.updateInputValue}/>
-        <button onClick={this.updateInputValue}>Add word</button>
-        <button onClick={this.produceGrid}>Generate Grid</button>
+        <h2 className="wordinput-title">Please input your word</h2>
+        <input autoFocus className="wordinput-input" value={inputValue} onChange={this.changeInputValue} onKeyPress={this.updateInputValue}/>
+        <button className="wordinput-add" onClick={this.updateInputValue}>Add word</button>
+        <button className="wordinput-generate" onClick={this.produceGrid}>Generate Grid</button>
       </div>
     )
   }

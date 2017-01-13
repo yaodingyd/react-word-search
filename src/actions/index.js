@@ -49,9 +49,21 @@ export const searchSucceed = () => {
 }
 
 export const tryToAddCharacter = (character, id) => (dispatch, getState) => {
-  dispatch(addCharacter(character, id))
-  let word = getState().searchResult.join('')
-  if (getState().wordList.includes(word)) {
-    dispatch(searchSucceed())
+  if (!getState().wordGrid[id.split('-')[0]][id.split('-')[1]].success){
+    dispatch(addCharacter(character, id))
+    let word = getState().searchResult.join('')
+    if (getState().wordList.includes(word)) {
+      dispatch(searchSucceed())
+    }
+  } 
+}
+
+export const tryToRemoveCharacter = (character, id) => (dispatch, getState) => {
+  let state =   getState().searchResult
+  let result = state.filter((char, index) => {
+    return char === character && index === 0 && index === state.length - 1
+  })
+  if (result.length > 0) {
+    dispatch(removeCharacter(character, id))
   }
 }
