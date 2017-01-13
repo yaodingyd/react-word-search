@@ -1,11 +1,15 @@
 import { generateGridData } from '../api/wordSearch'
 
+import { getWord } from '../utility'
+
 
 export const ADD_WORD = 'ADD_WORD'
 export const GENERATE_GRID = 'GENERATE_GRID'
 export const ADD_CHAR = 'ADD_CHAR'
 export const REMOVE_CHAR = 'REMOVE_CHAR'
 export const SEARCH_SUCCEED = 'SEARCH_SUCCEED'
+export const ENABLE_AVAILABLE = 'ENABLE_AVAILABLE'
+export const DISABLE_AVAILABLE = 'DISABLE_AVAILABLE'
 
 export const addWord = (word) => {
   return {
@@ -42,26 +46,121 @@ export const removeCharacter = (character, id) => ({
   id
 })
 
+export const enableAvailable = (ids) => ({
+  type: ENABLE_AVAILABLE,
+  ids
+})
+
+export const disableAvailable = (ids) => ({
+  type: DISABLE_AVAILABLE,
+  ids
+})
+
 export const searchSucceed = () => {
   return {
     type: SEARCH_SUCCEED
   }
 }
 
+let firstTile
+let direction
+
 export const tryToAddCharacter = (character, id) => (dispatch, getState) => {
-  if (!getState().wordGrid[id.split('-')[0]][id.split('-')[1]].success){
+  let wordGrid = getState().wordGrid
+  let r = parseInt(id.split('-')[0], 10)
+  let col = parseInt(id.split('-')[1], 10)
+  if (wordGrid[r][col].available || getState().searchResult.length === 0){
     dispatch(addCharacter(character, id))
-    let word = getState().searchResult.join('')
+    let word = getWord(getState().searchResult)
     if (getState().wordList.includes(word)) {
       dispatch(searchSucceed())
+      return
+    } 
+    // display available tiles is so complicated
+    let ids = []
+    if (getState().searchResult.length === 1) {
+      firstTile = getState().searchResult[0] 
+      if (r - 1 >= 0) {
+        ids.push([r - 1, col])
+      }
+      if ( r + 1 < 15) {
+        ids.push([r + 1, col])
+      }
+      if (col - 1 >= 0) {
+        ids.push([r, col - 1])
+      }
+      if ( col + 1 < 15) {
+        ids.push([r, col + 1])
+      }
+      dispatch(enableAvailable(ids))
+    } else if (getState().searchResult.length === 2) {
+      if (firstTile.r === r) {
+        direction = 'r'
+        ids = []
+        if (firstTile.r - 1 >= 0) {
+          ids.push([firstTile.r - 1, firstTile.col])
+        }
+        if (firstTile.r + 1 < 15) {
+          ids.push([firstTile.r + 1, firstTile.col])
+        }
+        dispatch(disableAvailable(ids))
+        wordGrid = getState().wordGrid
+        ids = []
+        if (col - 1 >= 0 && !wordGrid[r][col - 1].selected &&  !wordGrid[r][col - 1].success) {
+          ids.push([r, col - 1])
+        }
+        if (col + 1 < 15 && !wordGrid[r][col + 1].selected &&  !wordGrid[r][col + 1].success) {
+          ids.push([r, col + 1])
+        }
+        dispatch(enableAvailable(ids))
+      } else {
+        direction = 'col'
+        ids = []
+        if (firstTile.col - 1 >= 0) {
+          ids.push([firstTile.r, firstTile.col - 1])
+        }
+        if (firstTile.col + 1 < 15) {
+          ids.push([firstTile.r, firstTile.col + 1])
+        }
+        dispatch(disableAvailable(ids))
+        wordGrid = getState().wordGrid
+        ids = []
+        if (r - 1 >= 0 && !wordGrid[r - 1][col].selected &&  !wordGrid[r - 1][col].success) {
+          ids.push([r - 1, col])
+        }
+        if (r + 1 < 15 && !wordGrid[r + 1][col].selected &&  !wordGrid[r + 1][col].success) {
+          ids.push([r + 1, col])
+        }
+        dispatch(enableAvailable(ids))
+      }
+    } else {
+      if (direction === 'r') {
+        id = []
+        if (col - 1 >= 0 && !wordGrid[r][col - 1].selected &&  !wordGrid[r][col - 1].success) {
+          ids.push([r, col - 1])
+        }
+        if (col + 1 < 15 && !wordGrid[r][col + 1].selected &&  !wordGrid[r][col + 1].success) {
+          ids.push([r, col + 1])
+        }
+        dispatch(enableAvailable(ids))
+      } else {
+                ids = []
+        if (r - 1 >= 0 && !wordGrid[r - 1][col].selected &&  !wordGrid[r - 1][col].success) {
+          ids.push([r - 1, col])
+        }
+        if (r + 1 < 15 && !wordGrid[r + 1][col].selected &&  !wordGrid[r + 1][col].success) {
+          ids.push([r + 1, col])
+        }
+        dispatch(enableAvailable(ids))
+      }
     }
   } 
 }
 
 export const tryToRemoveCharacter = (character, id) => (dispatch, getState) => {
   let state =   getState().searchResult
-  let result = state.filter((char, index) => {
-    return char === character && index === 0 && index === state.length - 1
+  let result = state.filter((obj, index) => {
+    return obj.character === character && (index === 0 || index === state.length - 1)
   })
   if (result.length > 0) {
     dispatch(removeCharacter(character, id))
