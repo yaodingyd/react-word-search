@@ -32,10 +32,17 @@ class WordInput extends Component {
     const {inputValue} = this.state
     return (
       <div>
-        <h2 className="wordinput-title">Please input your word</h2>
-        <input autoFocus className="wordinput-input" value={inputValue} onChange={this.changeInputValue} onKeyPress={this.updateInputValue}/>
-        <button className="wordinput-add" onClick={this.updateInputValue}>Add word</button>
-        <button className="wordinput-generate" onClick={this.produceGrid}>Generate Grid</button>
+        <h1 className="wordinput-title text-success">Please input your word</h1>
+        <div className="input-group">
+          <input autoFocus type="text" className="wordinput-input form-control" value={inputValue} onChange={this.changeInputValue} onKeyPress={this.updateInputValue}/>
+          <span className="input-group-btn">
+            <button className="wordinput-add btn btn-outline-success" onClick={this.updateInputValue}>Add word</button>
+          </span>
+        </div>
+        { this.props.wordList.length > 0 &&
+        <div className="text-center">
+          <button className="wordinput-generate btn btn-success" onClick={this.produceGrid}>Generate Grid</button>
+        </div> } 
       </div>
     )
   }
@@ -43,7 +50,8 @@ class WordInput extends Component {
 
 WordInput.propTypes = {
   updateWordList: PropTypes.func,
-  produceGird: PropTypes.func
+  produceGird: PropTypes.func,
+  wordList: PropTypes.arrayOf(PropTypes.string)
 }
 
 export default WordInput

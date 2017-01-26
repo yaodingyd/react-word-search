@@ -6,6 +6,8 @@
     "react-scripts": "0.8.5"
   },
   "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "font-awesome": "^4.7.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
@@ -20,5 +22,13 @@
     "eject": "react-scripts eject",
     "deploy": "npm run build&&gh-pages -d build"
   },
-  "homepage": "http://yaodingyd.github.io/react-word-search"
+  "homepage": "http://yaodingyd.github.io/react-word-search",
+  "description": "A word search game build with React.",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/yaodingyd/react-word-search.git",
+    "type": "git"
+  },
+  "author": "Yao Ding",
+  "license": "MIT"
 }

@@ -3,19 +3,23 @@ import { connect } from 'react-redux'
 import WordList from '../components/WordList'
 import WordInput from '../components/WordInput'
 import WordGrid from '../components/WordGrid'
-import { addWord, produceGrid, tryToAddCharacter, tryToRemoveCharacter } from '../actions'
+import Header from '../components/Header'
+import { addWord, produceGrid, tryToAddCharacter, tryToRemoveCharacter, toggleAnswer, resetGrid } from '../actions'
 
 //const wordGrid = ['test', 'test', 'test', 'test' ]
 
 class App extends Component {
 
   render () {
-    const { updateWord, wordList, produceGrid, wordGrid, handleTileClick} = this.props
+    const { updateWord, wordList, produceGrid, wordGrid, handleTileClick, showAnswer, clickReset, clickAnswer} = this.props
     return (
-      <div className="container">
-        <WordInput updateWordList={updateWord} produceGrid={produceGrid}/>
-        <WordList wordList={wordList}/>
-        <WordGrid wordGrid={wordGrid} handleTileClick={handleTileClick}/>
+      <div>
+        <Header />
+        <div className="container">
+          <WordInput updateWordList={updateWord} produceGrid={produceGrid} wordList={wordList}/>
+          <WordList wordList={wordList}/>
+          <WordGrid wordGrid={wordGrid} handleTileClick={handleTileClick} showAnswer={showAnswer} clickAnswer={clickAnswer} clickReset={clickReset}/>
+        </div>
       </div>
     )
   }
@@ -36,6 +40,12 @@ function mapDispatchToProps (dispatch) {
       } else {
         dispatch(tryToRemoveCharacter(character, id))
       }
+    },
+    clickAnswer: () => {
+      dispatch(toggleAnswer())
+    },
+    clickReset: () => {
+      dispatch(resetGrid())
     }
   }
 }
@@ -43,7 +53,8 @@ function mapDispatchToProps (dispatch) {
 function mapStateToProps (state) {
   return {
     wordList: state.wordList,
-    wordGrid: state.wordGrid
+    wordGrid: state.wordGrid,
+    showAnswer: state.showAnswer
   }
 }
 

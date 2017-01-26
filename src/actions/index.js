@@ -10,6 +10,18 @@ export const REMOVE_CHAR = 'REMOVE_CHAR'
 export const SEARCH_SUCCEED = 'SEARCH_SUCCEED'
 export const ENABLE_AVAILABLE = 'ENABLE_AVAILABLE'
 export const DISABLE_AVAILABLE = 'DISABLE_AVAILABLE'
+export const RESET_GRID = 'RESET_GRID'
+export const TOGGLE_ANSWER = 'TOGGLE_ANSWER'
+
+export const toggleAnswer = () => ({
+  type: TOGGLE_ANSWER
+})
+
+export const resetGrid = () => {
+  return {
+    type: RESET_GRID
+  }
+}
 
 export const addWord = (word) => {
   return {
@@ -135,7 +147,7 @@ export const tryToAddCharacter = (character, id) => (dispatch, getState) => {
       }
     } else {
       if (direction === 'r') {
-        id = []
+        ids = []
         if (col - 1 >= 0 && !wordGrid[r][col - 1].selected &&  !wordGrid[r][col - 1].success) {
           ids.push([r, col - 1])
         }
@@ -144,7 +156,7 @@ export const tryToAddCharacter = (character, id) => (dispatch, getState) => {
         }
         dispatch(enableAvailable(ids))
       } else {
-                ids = []
+        ids = []
         if (r - 1 >= 0 && !wordGrid[r - 1][col].selected &&  !wordGrid[r - 1][col].success) {
           ids.push([r - 1, col])
         }

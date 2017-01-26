@@ -25,6 +25,17 @@ const wordGrid = (state = [], action) => {
       return [
         ...action.grid
       ]
+    case ACTIONS.RESET_GRID:
+      return state.map((row) => {
+        return row.map((tile) => {
+          return {
+            ...tile,
+            selected: false,
+            success: false,
+            available: false
+          }
+        })
+      })
     case ACTIONS.ADD_CHAR:
       newState[row][column] = {
         ...newState[row][column],
@@ -95,6 +106,17 @@ const searchResult = (state = [], action) => {
       })
     case ACTIONS.SEARCH_SUCCEED:
       return []
+    case ACTIONS.RESET_GRID:
+      return []
+    default:
+      return state
+  }
+}
+
+const showAnswer = (state = false, action) => {
+  switch (action.type) {
+    case ACTIONS.TOGGLE_ANSWER:
+      return !state;
     default:
       return state
   }
@@ -103,5 +125,6 @@ const searchResult = (state = [], action) => {
 export default combineReducers({
   wordList,
   wordGrid,
-  searchResult
+  searchResult,
+  showAnswer
 })

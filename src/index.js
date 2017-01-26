@@ -7,6 +7,9 @@ import createLogger from 'redux-logger'
 import App from './containers/App'
 import word from './reducers'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'font-awesome/css/font-awesome.css'
+
 const loggerMiddleware = createLogger()
 
 const store = createStore(
