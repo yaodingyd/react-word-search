@@ -1,0 +1,33 @@
+.word-enter {
+  opacity: 0.01;
+}
+
+.word-enter.word-enter-active {
+  opacity: 1;
+  transition: all 500ms ease-in;
+}
+
+.word-leave {
+  opacity: 1;
+}
+
+.word-leave.word-leave-active {
+  opacity: 0.01;
+  transition: all 300ms ease-in;
+}
+
+.word-item {
+  cursor: pointer;
+  position: relative;
+}
+
+.word-item:hover {
+  background: aqua;
+  color: #fff;
+}
+
+.word-item:hover::after {
+  content: "\274C";
+  position: absolute;
+  right: 1rem;
+}

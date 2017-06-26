@@ -1,17 +1,39 @@
 import { generateGridData } from '../api/wordSearch'
-
 import { getWord } from '../utility'
 
-
+// wordlist related
 export const ADD_WORD = 'ADD_WORD'
+export const REMOVE_WORD = 'REMOVE_WORD'
+// grid related
 export const GENERATE_GRID = 'GENERATE_GRID'
+export const RESET_GRID = 'RESET_GRID'
+export const CLEAR_GRID = 'CLEAR_GRID'
+// search related
 export const ADD_CHAR = 'ADD_CHAR'
 export const REMOVE_CHAR = 'REMOVE_CHAR'
 export const SEARCH_SUCCEED = 'SEARCH_SUCCEED'
 export const ENABLE_AVAILABLE = 'ENABLE_AVAILABLE'
 export const DISABLE_AVAILABLE = 'DISABLE_AVAILABLE'
-export const RESET_GRID = 'RESET_GRID'
+// others
 export const TOGGLE_ANSWER = 'TOGGLE_ANSWER'
+
+
+export const addWord = (word) => {
+  return {
+    type: ADD_WORD,
+    id: Date.now(),
+    word
+  }
+}
+
+export const removeWord = (id) => {
+  return {
+    type: REMOVE_WORD,
+    id
+  }
+}
+
+
 
 export const toggleAnswer = () => ({
   type: TOGGLE_ANSWER
@@ -23,12 +45,7 @@ export const resetGrid = () => {
   }
 }
 
-export const addWord = (word) => {
-  return {
-    type: ADD_WORD,
-    word
-  }
-}
+
 
 const updateGrid = (grid) => {
   return {

@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
-import App from './containers/App'
+import { createLogger } from 'redux-logger'
+import { BrowserRouter } from 'react-router-dom'
+import App from './App'
 import word from './reducers'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -21,8 +22,10 @@ const store = createStore(
 )
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
   document.getElementById('root')
 );

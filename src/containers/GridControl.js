@@ -1,23 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import WordList from '../components/WordList'
-import WordInput from '../components/WordInput'
 import WordGrid from '../components/WordGrid'
 import Header from '../components/Header'
 import { addWord, produceGrid, tryToAddCharacter, tryToRemoveCharacter, toggleAnswer, resetGrid } from '../actions'
 
 //const wordGrid = ['test', 'test', 'test', 'test' ]
 
-class App extends Component {
+class GridControl extends Component {
 
   render () {
     const { updateWord, wordList, produceGrid, wordGrid, handleTileClick, showAnswer, clickReset, clickAnswer} = this.props
     return (
       <div>
-        <Header />
-        <div className="container">
-          <WordInput updateWordList={updateWord} produceGrid={produceGrid} wordList={wordList}/>
-          <WordList wordList={wordList}/>
+        <div className="container mt-4">
           <WordGrid wordGrid={wordGrid} handleTileClick={handleTileClick} showAnswer={showAnswer} clickAnswer={clickAnswer} clickReset={clickReset}/>
         </div>
       </div>
@@ -69,4 +64,4 @@ function mergeProps (stateProps, dispatchProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(GridControl)
