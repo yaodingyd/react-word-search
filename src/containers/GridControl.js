@@ -12,7 +12,7 @@ class GridControl extends Component {
     const { updateWord, wordList, produceGrid, wordGrid, handleTileClick, showAnswer, clickReset, clickAnswer} = this.props
     return (
       <div>
-        <div className="container mt-4">
+        <div className="container-fluid mt-4">
           <WordGrid wordGrid={wordGrid} handleTileClick={handleTileClick} showAnswer={showAnswer} clickAnswer={clickAnswer} clickReset={clickReset}/>
         </div>
       </div>

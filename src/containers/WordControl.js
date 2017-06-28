@@ -8,9 +8,9 @@ class WordControl extends Component {
   render () {
     const { updateWord, removeWord, wordList } = this.props
     return (
-      <div className="container mt-4">
+      <div className="container-fluid mt-4">
         <div className="row">
-          <div className="col-6 offset-md-3">
+          <div className="col-md-6 offset-md-3 col-sm-10 offset-sm-1">
             <WordInput wordList={wordList} addWord={updateWord}/>
             <WordList wordList={wordList} removeWord={removeWord}/>
           </div>
