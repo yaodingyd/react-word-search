@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Route } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom'
 import { CSSTransitionGroup } from 'react-transition-group'
 
 import Header from './components/Header'
@@ -18,8 +18,10 @@ class App extends Component {
         </nav>
         <Route render={({ location }) => (
           <CSSTransitionGroup transitionName="word" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-            <Route exact path="/word" key={location.key} location={location} component={WordControl} />
-            <Route path="/grid"  key={location.key} location={location} component={Header} />
+            <Switch  key={location.key} location={location}>
+              <Route exact path="/word" component={WordControl} />
+              <Route path="/grid" component={Header} />
+            </Switch>
           </CSSTransitionGroup>
         )} />
       </div>
