@@ -8,6 +8,10 @@ import { addWord, produceGrid, tryToAddCharacter, tryToRemoveCharacter, toggleAn
 
 class GridControl extends Component {
 
+  componentDidMount () {
+    this.props.produceGrid()
+  }
+
   render () {
     const { updateWord, wordList, produceGrid, wordGrid, handleTileClick, showAnswer, clickReset, clickAnswer} = this.props
     return (

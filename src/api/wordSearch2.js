@@ -48,7 +48,7 @@ function directionInfo(word, direction, width, height) {
 }
 
 
-function wordSearch({words, width = 20, height = 20}) {
+export function generateGridData({words, width = 20, height = 20}) {
   words.sort((a, b) => a.length < b.length ? -1 : 1)
 
   let grid = new Array(height)
@@ -58,19 +58,22 @@ function wordSearch({words, width = 20, height = 20}) {
   let unplaced = []
 
   for (let i = 0; i < words.length; i++) {
-    const word = originalWord = words[i]
+    const word = words[i]
+    const originalWord = word
     let attempts = 0
     while (attempts < MAX_ATTEMPTS) {
       const direction = Math.floor(Math.random() * 4)
       const info = directionInfo(word, direction, width, height)
 
       if (info.maxx < 0 || info.maxy < 0 || info.maxy < info.miny || info.maxx < info.minx) {
-        unplaced.push(originalword)
+        unplaced.push(originalWord)
         break
       }
 
-      let x = ox = Math.round(Math.random() * (info.maxx - info.minx) + info.minx)
-      let y = oy = Math.round(Math.random() * (info.maxy - info.miny) + info.miny)
+      let x = Math.round(Math.random() * (info.maxx - info.minx) + info.minx)
+      const ox = x
+      let y = Math.round(Math.random() * (info.maxy - info.miny) + info.miny)
+      const oy = y
 
       let placeable = true
       let count = 0
@@ -104,24 +107,34 @@ function wordSearch({words, width = 20, height = 20}) {
       break
     } 
 
-    if (attempts >= 20) unplaced.push(originalword)
+    if (attempts >= 20) unplaced.push(originalWord)
   } 
   
-  let solved = JSON.parse(JSON.stringify(grid))
+  // let solved = JSON.parse(JSON.stringify(grid))
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
       if (!grid[i][j]) {
-        solved[i][j] = ' '
-        grid[i][j] = LETTERS.charAt(Math.floor(Math.random() * LETTERS.length))
+        // solved[i][j] = ' '
+        // grid[i][j] = LETTERS.charAt(Math.floor(Math.random() * LETTERS.length))
+        grid[i][j] = {
+          character: LETTERS.charAt(Math.floor(Math.random() * LETTERS.length)),
+          selected: false,
+          available: false,
+          success: false,
+          answer: false
+        }
+      } else {
+        grid[i][j] = {
+          character: grid[i][j],
+          selected: false,
+          available: false,
+          success: false,
+          answer: true
+        }
       }
     }
   }
 
-  return {
-    solved,
-    grid
-  }
-
+  return grid
+  
 }
-
-

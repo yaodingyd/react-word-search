@@ -1,4 +1,4 @@
-import { generateGridData } from '../api/wordSearch'
+import { generateGridData } from '../api/wordSearch2'
 import { getWord } from '../utility'
 
 // wordlist related
@@ -55,7 +55,7 @@ const updateGrid = (grid) => {
 }
 
 export const produceGrid = (wordList) => (dispatch) => {
-  let grid = generateGridData(wordList, 15)
+  let grid = generateGridData({words: wordList})
   dispatch(updateGrid(grid))
 }
 

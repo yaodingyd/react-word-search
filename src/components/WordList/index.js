@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './style.css'
 
 class WordList extends Component {
@@ -8,11 +8,13 @@ class WordList extends Component {
     let { wordList, removeWord } = this.props
     return (
       <ul className="list-group mt-3">
-        <CSSTransitionGroup transitionName="word" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+        <TransitionGroup>
           {wordList.map(word => (
-            <li className="list-group-item word-item" key={word.id} onClick={removeWord.bind(this, word.id)}>{word.text}</li>
+            <CSSTransition key={word.id} classNames="word" timeout={500}>
+              <li className="list-group-item word-item" onClick={removeWord.bind(this, word.id)}>{word.text}</li>
+            </CSSTransition>
           ))}
-        </CSSTransitionGroup>
+        </TransitionGroup>
       </ul>
     )
   }

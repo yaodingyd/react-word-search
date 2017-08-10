@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import './style.css'
 
@@ -27,13 +27,17 @@ class Header extends Component {
 
         <a className="navbar-brand text-success" href="/react-word-search">WordSearch</a>
 
-        <CSSTransitionGroup className={`navbar-collapse justify-content-end`} transitionName="header" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-          {showMenu && <ul className="navbar-nav">
-            <li className="nav-item active">
-              <a className="nav-link" href="https://yaodingyd.github.io">YD</a>
-            </li>
-          </ul>}
-        </CSSTransitionGroup>
+        <TransitionGroup className={`navbar-collapse justify-content-end`}>
+          {showMenu && 
+            <CSSTransition classNames="header" timeout={500}>
+              <ul className="navbar-nav">
+              <li className="nav-item active">
+                <a className="nav-link" href="https://yaodingyd.github.io">YD</a>
+              </li>
+            </ul>
+            </CSSTransition>
+          }
+        </TransitionGroup>
       </nav>
     )
   }

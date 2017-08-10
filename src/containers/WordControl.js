@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import WordList from '../components/WordList'
 import WordInput from '../components/WordInput'
+import { Link } from 'react-router-dom'
 import { addWord, removeWord } from '../actions'
 
 class WordControl extends Component {
@@ -15,6 +16,11 @@ class WordControl extends Component {
             <WordList wordList={wordList} removeWord={removeWord}/>
           </div>
         </div>
+        { wordList.length > 0 &&
+          <div className="row">
+            <Link to="/grid">Next</Link>
+          </div>
+        }
       </div>
     )
   }
