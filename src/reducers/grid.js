@@ -55,22 +55,22 @@ const grid = (state = [], action) => {
           }
         })
       })
-    case ACTIONS.ENABLE_AVAILABLE:
-      action.ids.forEach((id) => {
-        newState[id[0]][id[1]] = {
-          ...newState[id[0]][id[1]],
-          available: true
-        }
-      })
-      return newState
-    case ACTIONS.DISABLE_AVAILABLE:
-      action.ids.forEach((id) => {
-        newState[id[0]][id[1]] = {
-          ...newState[id[0]][id[1]],
-          available: false
-        }
-      })
-      return newState
+    // case ACTIONS.ENABLE_AVAILABLE:
+    //   action.ids.forEach((id) => {
+    //     newState[id[0]][id[1]] = {
+    //       ...newState[id[0]][id[1]],
+    //       available: true
+    //     }
+    //   })
+    //   return newState
+    // case ACTIONS.DISABLE_AVAILABLE:
+    //   action.ids.forEach((id) => {
+    //     newState[id[0]][id[1]] = {
+    //       ...newState[id[0]][id[1]],
+    //       available: false
+    //     }
+    //   })
+    //   return newState
     default:
       return state
   }

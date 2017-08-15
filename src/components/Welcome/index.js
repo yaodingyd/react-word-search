@@ -9,7 +9,7 @@ class Welcome extends React.Component {
           <h1>React Word Search</h1>
           <p>Build with React and Redux.</p>
           <p>
-            <Link className="btn btn-info" to="/word">Go Next</Link>
+            <Link className="btn btn-info" to="/lang">Go Next</Link>
           </p>
         </div>
       </div>

@@ -56,7 +56,8 @@ body {
   justify-content: space-around;
 }
 
-.grid-control button {
+.grid-control button,
+.grid-control a {
   margin: 2rem 0;
 }
 

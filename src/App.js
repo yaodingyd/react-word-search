@@ -5,6 +5,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Header from './components/Header'
 import WordControl from './containers/WordControl'
 import GridControl from './containers/GridControl'
+import Lang from './components/Lang'
 import Welcome from './components/Welcome'
 import './App.css'
 
@@ -18,6 +19,7 @@ class App extends Component {
             <CSSTransition key={location.key} classNames="route" timeout={500}>
               <Switch location={location}>
                 <Route exact path="/" component={Welcome} />
+                <Route path="/lang" component={Lang} />
                 <Route path="/word" component={WordControl} />
                 <Route path="/grid" component={GridControl} />
               </Switch>

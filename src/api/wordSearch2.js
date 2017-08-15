@@ -4,7 +4,6 @@
  */
 
 const MAX_ATTEMPTS = 20
-const LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 
 function directionInfo(word, direction, width, height) {
   // max, min are the possible start position
@@ -47,8 +46,14 @@ function directionInfo(word, direction, width, height) {
   }
 }
 
-export function generateGridData({words, width = 12, height = 12}) {
+export function generateGridData({words, width = 12, height = 12, lang = 'en'}) {
   words.sort((a, b) => a.length < b.length ? -1 : 1)
+  let LETTERS
+  if (lang === 'en') {
+    LETTERS = 'abcdefghijklmnopqrstuvwxyz'
+  } else {
+    LETTERS = '你我他和天地风云的好吧什么'
+  }
 
   let grid = new Array(height)
   for (let i = 0; i < grid.length; i++)

@@ -16,9 +16,19 @@ const showAnswer = (state = false, action) => {
   }
 }
 
+const lang = (state = 'en', action) => {
+  switch (action.type) {
+    case ACTIONS.TOGGLE_LANG:
+      return state = state === 'en' ? 'ch' : 'en'
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   words,
   grid,
   search,
-  showAnswer
+  showAnswer,
+  lang
 })
