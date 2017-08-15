@@ -47,8 +47,7 @@ function directionInfo(word, direction, width, height) {
   }
 }
 
-
-export function generateGridData({words, width = 20, height = 20}) {
+export function generateGridData({words, width = 12, height = 12}) {
   words.sort((a, b) => a.length < b.length ? -1 : 1)
 
   let grid = new Array(height)

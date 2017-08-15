@@ -8,7 +8,9 @@ import search from './search'
 const showAnswer = (state = false, action) => {
   switch (action.type) {
     case ACTIONS.TOGGLE_ANSWER:
-      return !state;
+      return !state
+    case ACTIONS.RESET_GRID:
+      return false
     default:
       return state
   }

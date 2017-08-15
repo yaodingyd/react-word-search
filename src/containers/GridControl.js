@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import WordGrid from '../components/WordGrid'
-import Header from '../components/Header'
-import { addWord, produceGrid, tryToAddCharacter, tryToRemoveCharacter, toggleAnswer, resetGrid } from '../actions'
+import { tryToAddCharacter, tryToRemoveCharacter, toggleAnswer, resetGrid } from '../actions'
 
 //const wordGrid = ['test', 'test', 'test', 'test' ]
 
 class GridControl extends Component {
 
   componentDidMount () {
-    this.props.produceGrid()
+    // this.props.produceGrid()
   }
 
   render () {
-    const { updateWord, wordList, produceGrid, wordGrid, handleTileClick, showAnswer, clickReset, clickAnswer} = this.props
+    const { wordGrid, handleTileClick, showAnswer, clickReset, clickAnswer} = this.props
     return (
       <div>
         <div className="container-fluid mt-4">
@@ -27,12 +26,6 @@ class GridControl extends Component {
 // ownProps means props actually passed into your component in JSX
 function mapDispatchToProps (dispatch) {
   return {
-    updateWord: (word) => {
-      dispatch(addWord(word))
-    },
-    produceGrid: (wordList) => {
-      dispatch(produceGrid(wordList))
-    },
     handleTileClick: (character, id, selected) => {
       if (!selected) {
         dispatch(tryToAddCharacter(character, id))
@@ -51,21 +44,20 @@ function mapDispatchToProps (dispatch) {
 
 function mapStateToProps (state) {
   return {
-    wordList: state.wordList,
-    wordGrid: state.wordGrid,
+    wordGrid: state.grid,
     showAnswer: state.showAnswer
   }
 }
 
 // Use mergeProps to get stateProps
-function mergeProps (stateProps, dispatchProps) {
-  return {
-    ...stateProps,
-    ...dispatchProps,
-    produceGrid: () => {
-      dispatchProps.produceGrid(stateProps.wordList)
-    }
-  }
-}
+// function mergeProps (stateProps, dispatchProps) {
+//   return {
+//     ...stateProps,
+//     ...dispatchProps,
+//     produceGrid: () => {
+//       dispatchProps.produceGrid(stateProps.wordList)
+//     }
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(GridControl)
+export default connect(mapStateToProps, mapDispatchToProps)(GridControl)

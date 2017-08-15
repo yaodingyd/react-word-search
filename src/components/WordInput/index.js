@@ -28,7 +28,7 @@ class WordInput extends Component {
     const { text } = this.state
     return (
       <div>
-        <h1 className="text-primary">Please input your word</h1>
+        <h1 className="text-success">Please input your word</h1>
         <div className="input-group">
           <input autoFocus type="text" className="form-control" value={text} onChange={this.changeText} onKeyPress={this.updateText}/>
           <span className="input-group-btn">

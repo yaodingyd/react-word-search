@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react'
-import GridControl from './GridControl'
-import './app.css'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import GridControl from '../GridControl'
+import '../app.css'
 
 class WordGrid extends Component {
   handleClick = (character, id, charObj) => {
@@ -13,8 +14,6 @@ class WordGrid extends Component {
     const { wordGrid } = this.props
     return (
       <div className="word-grid">
-        { wordGrid.length > 0 &&
-          <GridControl clickAnswer={this.props.clickAnswer} clickReset={this.props.clickReset}/>}
         <table className="table table-bordered">
           <tbody>
           { wordGrid.map( wordRow => {
@@ -32,6 +31,8 @@ class WordGrid extends Component {
           )})}
           </tbody>
         </table>
+        { wordGrid.length > 0 &&
+          <GridControl clickAnswer={this.props.clickAnswer} clickReset={this.props.clickReset}/>}
       </div>
     )
   }

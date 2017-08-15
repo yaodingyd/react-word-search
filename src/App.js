@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import Header from './components/Header'
@@ -13,17 +13,13 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <nav>
-          <Link to="/word">word</Link>
-          <Link to="/test">test</Link>
-        </nav>
         <Route render={({ location }) => (
-          <TransitionGroup>
-            <CSSTransition key={location.key} classNames="route" timeout={300}>
+          <TransitionGroup className="pt-5">
+            <CSSTransition key={location.key} classNames="route" timeout={500}>
               <Switch location={location}>
                 <Route exact path="/" component={Welcome} />
                 <Route path="/word" component={WordControl} />
-                <Route path="/test" component={Welcome} />
+                <Route path="/grid" component={GridControl} />
               </Switch>
             </CSSTransition>
           </TransitionGroup>
