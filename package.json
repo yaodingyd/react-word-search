@@ -23,9 +23,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "npm run build&&gh-pages -d build"
+    "deploy": "npm run build && surge -p build/ -d react-word-search.surge.sh",
+    "deploy-github": "npm run build&&gh-pages -d build"
   },
-  "homepage": "http://yaodingyd.github.io/react-word-search",
+  "homepage": "http://react-word-search.surge.sh",
   "description": "A word search game build with React.",
   "main": "index.js",
   "repository": {
